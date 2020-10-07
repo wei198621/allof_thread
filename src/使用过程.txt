@@ -1,0 +1,53 @@
+
+
+ * https://www.bilibili.com/video/BV1rJ41117XR?t=10
+
+***************************************    step01     ****************************************
+ * https://www.bilibili.com/video/BV1rJ41117XR?t=10
+package com.tiza.leo._01threeTypeOfMultithread;        clsThread
+
+1.1  clsThread 继承自 Thread 类，  使用start方法是启动了一个新线程
+
+1.2  clsRunnable 实现 Runnable ，将 clsRunnable 作为参数 放到一个thread中，启动当前thread的 start 方法
+      clsThread  clsRunnable 都可以实现多线程，缺点是run方法是void类型的，无法将值放回main主线程中，
+      Jdk1.5 Doug Lea 新增了 callable 接口
+
+1.3  clsCallable
+      比较   clsThread   clsRunnable    clsCallable  三个类
+
+***************************************    step02     ****************************************
+
+ * https://www.bilibili.com/video/BV1rJ41117XR?t=10
+2.1    threadPkTest
+       使用最原始的方式启动10000个线程，用时大概3秒钟
+       thread.join();     //join  等待10000个线程执行完成后，再往下执行 ，没有join就不等待
+       比较join 语句执行不执行，打印变化
+2.2    threadPoolPkTest
+       使用线程池的方式启动1000个线程，用时大概 30 毫秒   Executors.newSingleThreadExecutor();
+       executorService.awaitTermination(1, TimeUnit.DAYS); //等待线程结束,相当于 threadPkTest 中的  thread.join();
+       相当去 thread.join(); 语句执行结束
+
+***************************************    step03     ****************************************
+
+ * https://www.bilibili.com/video/BV1rJ41117XR?t=10
+clsThreadpool01
+      比较  execute  submit 方法异同
+      executorService.execute(new Runnable() {        //execute 方法 无返回值
+      executorService.submit(new Runnable() {         // submit 返回 Future<?>
+
+***************************************    step04     ****************************************
+
+ * https://www.bilibili.com/video/BV1rJ41117XR?t=10
+rejectPoolTest
+      RejectedExecutionHandler
+***************************************    step05     ****************************************
+***************************************    step06     ****************************************
+***************************************    step07     ****************************************
+***************************************    step08     ****************************************
+***************************************    step09     ****************************************
+***************************************    step10     ****************************************
+***************************************    step11     ****************************************
+***************************************    step12     ****************************************
+***************************************    step13     ****************************************
+***************************************    step14     ****************************************
+***************************************    step15     ****************************************
