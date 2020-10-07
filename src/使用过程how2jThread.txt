@@ -82,19 +82,6 @@ _08Lock
 09  原子访问
 _09AtomicOperation
 
-
-
-
-
-
-
-
-
-05： 死锁     level09
-                             。
-
-
-09： 原子访问
     JDK6 以后，新增加了一个包java.util.concurrent.atomic，里面有各种原子类，比如AtomicInteger
     所谓的原子性操作即不可中断的操作，比如赋值操作     int i = 5;
     原子性操作本身是线程安全的
