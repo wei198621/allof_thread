@@ -1,0 +1,104 @@
+how2j.cn    JAVA 中级 多线程
+https://how2j.cn/k/thread/thread-start/353.html
+
+01 启动一个线程
+_01StartThread
+
+01： 启动一个线程
+_0101WithoutThread          没有使用多线程情况下的演示
+_0102CreateByThread         继承Thread类
+_0103CreateByRunnable       实现Runnable接口
+_0104CreateByAnonymousCls   匿名类的方式
+
+        注： 启动线程是start()方法，run()并不能启动一个新的线程
+
+02  常见线程方法
+_02ThreadMethod
+02：  常见线程方法
+      sleep          当前线程暂停
+      join           加入到当前线程 （比较常用）
+      setPriority    线程优先级
+      yield          临时暂停
+      setDaemon      守护线程
+
+
+03  同步
+_03Synchronize
+
+       synchronized  关键字， 1. 专门定义一个object 用户 synchronized(obj)
+                             2. 直接同步某个对象，同一时刻，只有一个线程可以访问此对象
+                                 final Hero gareen = new Hero();  synchronized(gareen)
+                             3. 方法本身增加 synchronized
+                             3.1 //直接在方法前加上修饰符synchronized,其所对应的同步对象，就是this,和hurt方法达到的效果一样
+                             public class HeroSynchronized {
+                                    public synchronized void recover() {
+                                        hp = hp + 1;
+                                    }
+                             }
+                             3.2  发给你法内容  synchronized (this) ，同在方法名前声明synchronized 效果一致
+                             public class HeroSynchronized {
+                                    public void hurt() {
+                                        synchronized (this) {
+                                            hp = hp - 1;
+                                        }
+                                    }
+                              }
+
+04  线程安全的类
+_04ThreadSafeCls
+    //线程不安全         线程安全
+    //HashMap          //Hashtable
+    //StringBuilder    //StringBuffer
+    //ArrayList        //Vector
+     List<Integer> list1 = Collections.synchronizedList(list0);  //貌似没有效果
+
+05  死锁
+_05Deadlock
+
+06  交互
+_06Interaction
+     wait()  :     让占用这个同步对象的线程，临时释放当前占用，并且等待。调用wait的前提条件是在 synchronized里，否则报错。
+     notify():     一个等待在这个同步对象的线程，你可以塑像过来了，有机会重新占用当前对象
+     notifyAll();  所有                       你们
+
+07  线程池
+_07Threadpool
+     线程池类ThreadPoolExecutor在包java.util.concurrent下
+     ThreadPoolExecutor threadPool= new ThreadPoolExecutor(10, 15, 60, TimeUnit.SECONDS, new LinkedBlockingQueue<Runnable>());
+     第一个参数10 表示这个线程池初始化了10个线程在里面工作
+     第二个参数15 表示如果10个线程不够用了，就会自动增加到最多15个线程
+     第三个参数60 结合第四个参数TimeUnit.SECONDS，表示经过60秒，多出来的线程还没有接到活儿，就会回收，最后保持池子里就10个
+     第四个参数TimeUnit.SECONDS 如上
+     第五个参数 new LinkedBlockingQueue() 用来放任务的集合
+     execute方法用于添加新的任务
+
+08  LOCK对象
+_08Lock
+     1. Lock是一个接口，而synchronized是Java中的关键字，synchronized是内置的语言实现，Lock是代码层面的实现。
+     2. Lock可以选择性的获取锁，如果一段时间获取不到，可以放弃。synchronized不行，会一根筋一直获取下去。
+         借助Lock的这个特性，就能够规避死锁，synchronized必须通过谨慎和良好的设计，才能减少死锁的发生。
+     3. synchronized在发生异常和同步块结束的时候，会自动释放锁。而Lock必须手动释放， 所以如果忘记了释放锁，一样会造成死锁。
+
+09  原子访问
+_09AtomicOperation
+
+
+
+
+
+
+
+
+
+05： 死锁     level09
+                             。
+
+
+09： 原子访问
+    JDK6 以后，新增加了一个包java.util.concurrent.atomic，里面有各种原子类，比如AtomicInteger
+    所谓的原子性操作即不可中断的操作，比如赋值操作     int i = 5;
+    原子性操作本身是线程安全的
+    但是 i++ 这个行为，事实上是有3个原子性操作组成的。
+    步骤 1. 取 i 的值
+    步骤 2. i + 1
+    步骤 3. 把新的值赋予i
